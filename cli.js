@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const yargs = require('yargs');
-const { hideBin } = require('yargs/helpers');
-const cliProgress = require('cli-progress');
+const path = require("path");
+const yargs = require("yargs");
+const { hideBin } = require("yargs/helpers");
+const cliProgress = require("cli-progress");
 
-const wpExtract = require('./lib/wpress-extract');
+const wpExtract = require("./lib/wpress-extract");
 
 async function main({ inputFile, outputDir, override }) {
   const progressBar = new cliProgress.SingleBar(
     {
-      format: 'Progress: {bar} | {percentage}%',
+      format: "Progress: {bar} | {percentage}%",
     },
     cliProgress.Presets.shades_classic
   );
@@ -47,7 +47,7 @@ async function main({ inputFile, outputDir, override }) {
     });
   } catch (error) {
     progressBar.stop();
-    console.error('Error: ', error.message);
+    console.error("Error: ", error.message);
   } finally {
     progressBar.stop();
 
@@ -59,23 +59,23 @@ async function main({ inputFile, outputDir, override }) {
 }
 
 yargs(hideBin(process.argv)).command(
-  '$0 <input>',
-  'Extract a .wpress archive',
+  "$0 <input>",
+  "Extract a .wpress archive",
   (_yargs) => {
     _yargs
-      .positional('input', {
-        describe: 'Path to the .wpress archive you want to extract',
-        type: 'string',
+      .positional("input", {
+        describe: "Path to the .wpress archive you want to extract",
+        type: "string",
       })
-      .option('o', {
-        alias: 'out',
-        describe: 'Directory where the content should be extracted to',
-        type: 'string',
+      .option("o", {
+        alias: "out",
+        describe: "Directory where the content should be extracted to",
+        type: "string",
       })
-      .option('f', {
-        alias: 'force',
-        describe: 'override existing directory',
-        type: 'boolean',
+      .option("f", {
+        alias: "force",
+        describe: "override existing directory",
+        type: "boolean",
       });
   },
   (argv) => {
@@ -83,7 +83,7 @@ yargs(hideBin(process.argv)).command(
     const inputFile = path.resolve(process.cwd(), argv.input);
 
     let outputDir =
-      typeof argv.out === 'string'
+      typeof argv.out === "string"
         ? path.resolve(process.cwd(), argv.out)
         : undefined;
     if (!outputDir) {
